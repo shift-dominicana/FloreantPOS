@@ -17,6 +17,7 @@
  */
 package com.floreantpos.ui.views;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -72,6 +73,7 @@ public class CookingInstructionSelectionView extends OkCancelOptionDialog {
 		table = new JTable();
 		table.setRowHeight(35);
 		scrollPane.setViewportView(table);
+		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(50,Integer.MAX_VALUE));
 
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
