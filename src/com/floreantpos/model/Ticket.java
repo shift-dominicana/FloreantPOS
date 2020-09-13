@@ -419,10 +419,13 @@ public class Ticket extends BaseTicket {
 
 	public Double getDeliveryCharge() {
 		Double deliveryCharge = super.getDeliveryCharge();
+		deliveryCharge =  0.0;
 		
-		if (deliveryCharge == 0.0d) {
-			return 50.0;
-		}
+		if (deliveryCharge == 0.0d && this.orderType.isDelivery()) 
+			deliveryCharge=  50.0;
+		
+			
+		
 		
 		return deliveryCharge;
 	}
