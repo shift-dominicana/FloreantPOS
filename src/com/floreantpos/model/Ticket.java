@@ -419,9 +419,11 @@ public class Ticket extends BaseTicket {
 
 	public Double getDeliveryCharge() {
 		Double deliveryCharge = super.getDeliveryCharge();
-		if (deliveryCharge == null) {
-			return 0.0;
+		
+		if (deliveryCharge == 0.0d) {
+			return 50.0;
 		}
+		
 		return deliveryCharge;
 	}
 
@@ -741,7 +743,7 @@ public class Ticket extends BaseTicket {
 	public void setCustomer(Customer customer) {
 		if (customer != null) {
 			addProperty(Ticket.CUSTOMER_ID, String.valueOf(customer.getAutoId()));
-			addProperty(Ticket.CUSTOMER_NAME, customer.getFirstName());
+			addProperty(Ticket.CUSTOMER_NAME, customer.getFirstName()+" "+customer.getLastName());
 			addProperty(Ticket.CUSTOMER_MOBILE, customer.getMobileNo());
 			addProperty(Ticket.CUSTOMER_ZIP_CODE, customer.getZipCode());
 		}
