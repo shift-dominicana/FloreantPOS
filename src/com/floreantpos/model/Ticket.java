@@ -419,11 +419,16 @@ public class Ticket extends BaseTicket {
 
 	public Double getDeliveryCharge() {
 		Double deliveryCharge = super.getDeliveryCharge();
-		deliveryCharge =  0.0;
 		
-		if (deliveryCharge == 0.0d && this.orderType.isDelivery()) 
-			deliveryCharge=  50.0;
 		
+		// Comes null from Drawer report. When close Drawer
+		if (this.orderType != null) {
+			if (deliveryCharge == 0.0d && this.orderType.isDelivery()) 
+				//Have to be a db field
+				deliveryCharge=  50.0;
+			else
+				deliveryCharge =  0.0;
+		}
 			
 		
 		
