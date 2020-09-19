@@ -4,7 +4,7 @@
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="2.253944402704733"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="336"/>
+	<property name="ireport.y" value="640"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
@@ -349,7 +349,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{itemName}]]></textFieldExpression>
 			</textField>
@@ -364,7 +364,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{itemSubtotal}]]></textFieldExpression>
 			</textField>
@@ -377,16 +377,10 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{itemQty}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement positionType="Float" x="0" y="14" width="198" height="1"/>
-				<graphicElement>
-					<pen lineStyle="Dotted"/>
-				</graphicElement>
-			</line>
 		</band>
 	</detail>
 	<summary>
@@ -432,7 +426,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{dueAmount}]]></textFieldExpression>
 			</textField>
@@ -454,7 +448,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{subtotalAmount}]]></textFieldExpression>
 			</textField>
@@ -480,16 +474,16 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{taxAmount}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement key="staticText-9" x="0" y="175" width="114" height="15" isRemoveLineWhenBlank="true">
-					<printWhenExpression><![CDATA[$P{dueAmountText}!=null]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$P{dueAmountText}!=null || $P{dueAmountText}!="0,00"]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{dueAmountText}]]></textFieldExpression>
 			</textField>
@@ -502,7 +496,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{tipAmount}]]></textFieldExpression>
 			</textField>
@@ -523,14 +517,14 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{paidAmount}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement key="staticText-7" x="0" y="147" width="114" height="15" isRemoveLineWhenBlank="true"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{paidAmountText}]]></textFieldExpression>
 			</textField>
@@ -552,7 +546,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{serviceCharge}]]></textFieldExpression>
 			</textField>
@@ -574,7 +568,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{discountAmount}]]></textFieldExpression>
 			</textField>
@@ -610,7 +604,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{deliveryCharge}]]></textFieldExpression>
 			</textField>
@@ -619,7 +613,7 @@
 					<printWhenExpression><![CDATA[$P{changedAmount} != null]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{changeAmountText}]]></textFieldExpression>
 			</textField>
@@ -631,7 +625,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{changedAmount}]]></textFieldExpression>
 			</textField>
@@ -688,7 +682,7 @@
 					<printWhenExpression><![CDATA[$P{adjustAmount}!=null]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{adjustAmountText}]]></textFieldExpression>
 			</textField>
@@ -701,7 +695,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{adjustAmount}]]></textFieldExpression>
 			</textField>
@@ -716,7 +710,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{tenderedAmount}]]></textFieldExpression>
 			</textField>
@@ -725,7 +719,7 @@
 					<printWhenExpression><![CDATA[$P{tenderedAmount}!=null]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="Monospaced" size="11"/>
+					<font fontName="Monospaced" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{tenderedAmountText}]]></textFieldExpression>
 			</textField>
