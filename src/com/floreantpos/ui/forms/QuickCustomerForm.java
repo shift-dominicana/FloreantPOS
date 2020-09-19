@@ -86,7 +86,7 @@ public class QuickCustomerForm extends BeanEditor<Customer> {
 		inputPanel.setBorder(BorderFactory.createTitledBorder("Enter Customer Information"));
 
 		JLabel lblAddress = new JLabel(Messages.getString("CustomerForm.18")); //$NON-NLS-1$
-		tfAddress = new JTextArea(new FixedLengthDocument(220));
+		tfAddress = new JTextArea(new FixedLengthDocument(620));
 		JScrollPane scrlDescription = new JScrollPane(tfAddress);
 		scrlDescription.setPreferredSize(PosUIManager.getSize(338, 52));
 
@@ -229,6 +229,17 @@ public class QuickCustomerForm extends BeanEditor<Customer> {
 		tfCity.setText(""); //$NON-NLS-1$
 		tfZip.setText(""); //$NON-NLS-1$
 		tfCellPhone.setText("");//$NON-NLS-1$
+	}
+	
+	public void updateCustomer(Customer customer) {
+		tfName.setText(customer.getName());//$NON-NLS-1$
+		tfFirstName.setText(customer.getName());//$NON-NLS-1$
+		tfLastName.setText(customer.getLastName());//$NON-NLS-1$
+		tfAddress.setText(customer.getAddress()); //$NON-NLS-1$
+		tfCity.setText(customer.getCity()); //$NON-NLS-1$
+		tfZip.setText(customer.getZipCode()); //$NON-NLS-1$
+		tfCellPhone.setText(customer.getMobileNo());//$NON-NLS-1$
+		setBean(customer);
 	}
 
 	@Override

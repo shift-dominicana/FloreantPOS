@@ -167,7 +167,7 @@ public class DefaultCustomerListView extends CustomerSelector {
 			public void valueChanged(ListSelectionEvent e) {
 				selectedCustomer = customerTable.getSelectedCustomer();
 				if (selectedCustomer != null) {
-					//btnInfo.setEnabled(true);
+					btnInfo.setEnabled(true);
 				}
 				else {
 					btnInfo.setEnabled(false);
@@ -185,10 +185,15 @@ public class DefaultCustomerListView extends CustomerSelector {
 		btnInfo = new PosButton(Messages.getString("CustomerSelectionDialog.23")); //$NON-NLS-1$
 		btnInfo.setFocusable(false);
 		panel.add(btnInfo, " skip 1, split 6"); //$NON-NLS-1$
-		btnInfo.setEnabled(false);
+		btnInfo.setEnabled(true);
+		btnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				doUpdateCustomer();
+			}
+		});
 
 		PosButton btnHistory = new PosButton(Messages.getString("CustomerSelectionDialog.24")); //$NON-NLS-1$
-		btnHistory.setEnabled(false);
+		btnHistory.setEnabled(true);
 		panel.add(btnHistory, ""); //$NON-NLS-1$
 
 		btnCreateNewCustomer = new PosButton(Messages.getString("CustomerSelectionDialog.25")); //$NON-NLS-1$
@@ -204,6 +209,7 @@ public class DefaultCustomerListView extends CustomerSelector {
 		btnRemoveCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				doRemoveCustomerFromTicket();
+				doSearchCustomer();
 			}
 		});
 		panel.add(btnRemoveCustomer, ""); //$NON-NLS-1$
@@ -324,14 +330,29 @@ public class DefaultCustomerListView extends CustomerSelector {
 	}
 
 	protected void doRemoveCustomerFromTicket() {
-		int option = POSMessageDialog.showYesNoQuestionDialog(this,
-				Messages.getString("CustomerSelectionDialog.2"), Messages.getString("CustomerSelectionDialog.32")); //$NON-NLS-1$ //$NON-NLS-2$
-		if (option != JOptionPane.YES_OPTION) {
-			return;
+		int option;
+		//Review Funcion when is a ticket
+		if (ticket != null){
+			option = POSMessageDialog.showYesNoQuestionDialog(this,
+					Messages.getString("CustomerSelectionDialog.2"), Messages.getString("CustomerSelectionDialog.32")); //$NON-NLS-1$ //$NON-NLS-2$
+			if (option != JOptionPane.YES_OPTION) {
+				return;
+			}
+		
+		
+			ticket.removeCustomer();
+			TicketDAO.getInstance().saveOrUpdate(ticket);
 		}
-
-		ticket.removeCustomer();
-		TicketDAO.getInstance().saveOrUpdate(ticket);
+		else
+		{
+			option = POSMessageDialog.showYesNoQuestionDialog(this,
+					Messages.getString("CustomerSelectionDialog.33"), Messages.getString("CustomerSelectionDialog.32")); //$NON-NLS-1$ //$NON-NLS-2$
+			if (option != JOptionPane.YES_OPTION) {
+				return;
+			}
+			CustomerDAO.getInstance().delete(getSelectedCustomer());
+		}
+		
 		//setCanceled(false);
 		//dispose();
 	}
@@ -396,9 +417,27 @@ public class DefaultCustomerListView extends CustomerSelector {
 			model.addItem(selectedCustomer);
 		}
 	}
+	
+	protected void doUpdateCustomer() {
+		boolean setKeyPad = true;
+		QuickCustomerForm form = new QuickCustomerForm(setKeyPad);
+		form.enableCustomerFields(true);
+		Customer customer = getSelectedCustomer();
+		if (customer != null) {
+			form.updateCustomer(customer);
+			BeanEditorDialog dialog = new BeanEditorDialog(POSUtil.getBackOfficeWindow(), form);
+			dialog.open();
+			/*if (!dialog.isCanceled()) {
+				selectedCustomer = (Customer) form.getBean();
+	
+				CustomerListTableModel model = (CustomerListTableModel) customerTable.getModel();
+				model.addItem(selectedCustomer);
+			}*/
+		}
+	}
 
 	@Override
-	public String getName() {
+ 	public String getName() {
 		return "C"; //$NON-NLS-1$
 	}
 
