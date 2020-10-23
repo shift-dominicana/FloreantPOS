@@ -423,7 +423,7 @@ public class Ticket extends BaseTicket {
 		
 		// Comes null from Drawer report. When close Drawer
 		if (this.orderType != null) {
-			if (deliveryCharge == 0.0d && this.orderType.isDelivery()) 
+			if (this.orderType.isDelivery()) 
 				//Have to be a db field
 				deliveryCharge=  50.0;
 			else
