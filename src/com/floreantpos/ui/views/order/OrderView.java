@@ -730,7 +730,7 @@ public class OrderView extends ViewPanel implements PaymentListener, TicketEditL
 
 		if (!dialog.isCanceled()) {
 			currentTicket.setCustomer(dialog.getSelectedCustomer());
-			btnCustomer.setText("<html><body><center>CUSTOMER<br>\"" + dialog.getSelectedCustomer().getName() + "\"</center></body></html>");
+			btnCustomer.setText("<html><body><center>CLIENTE<br><b>\"" + dialog.getSelectedCustomer().getFirstName() + " "+ dialog.getSelectedCustomer().getMobileNo() + "\"<b></center></body></html>");
 
 		}
 	}
