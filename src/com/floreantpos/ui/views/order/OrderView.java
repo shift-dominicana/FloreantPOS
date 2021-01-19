@@ -861,7 +861,7 @@ public class OrderView extends ViewPanel implements PaymentListener, TicketEditL
 				btnGuestNo.setText("GUEST" + ": " + String.valueOf(currentTicket.getNumberOfGuests()));
 			}
 			
-			if(type.isDelivery()) {
+			if(type.isDelivery() && getCurrentTicket().getCustomer() != null) {
 				btnCustomer.setText("<html><body><center>CLIENTE<br><b>\"" + getCurrentTicket().getCustomer().getFirstName() +" "+getCurrentTicket().getCustomer().getMobileNo() + "\"<b></center></body></html>");
 			}
 			OrderServiceExtension orderService = (OrderServiceExtension) ExtensionManager.getPlugin(OrderServiceExtension.class);
