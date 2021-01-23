@@ -174,7 +174,10 @@ public class OrderInfoDialog extends POSDialog {
 		Ticket ticket = new Ticket();
 		ticket.setPriceIncludesTax(oldticket.isPriceIncludesTax());
 		ticket.setOrderType(oldticket.getOrderType());
-		ticket.setProperties(oldticket.getProperties());
+		
+		//This Update the data in ticket_properties with the new ticket id and the old ticket result without properties.
+		//ticket.setProperties(oldticket.getProperties());
+		
 		ticket.setTerminal(Application.getInstance().getTerminal());
 		ticket.setOwner(Application.getCurrentUser());
 		ticket.setShift(Application.getInstance().getCurrentShift());
@@ -266,6 +269,9 @@ public class OrderInfoDialog extends POSDialog {
 		}
 		ticket.getTicketItems().addAll(newTicketItems);
 		ticket.setCustomer(oldticket.getCustomer());
+		if (ticket.getCustomer() != null)
+			ticket.setDeliveryAddress(ticket.getCustomer().getAddress());
+		
 		OrderView.getInstance().setCurrentTicket(ticket);
 		RootView.getInstance().showView(OrderView.VIEW_NAME);
 
