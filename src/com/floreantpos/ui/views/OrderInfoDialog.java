@@ -30,8 +30,10 @@ import javax.swing.JPanel;
 
 import com.floreantpos.Messages;
 import com.floreantpos.main.Application;
+import com.floreantpos.model.CookingInstruction;
 import com.floreantpos.model.Ticket;
 import com.floreantpos.model.TicketItem;
+import com.floreantpos.model.TicketItemCookingInstruction;
 import com.floreantpos.model.TicketItemDiscount;
 import com.floreantpos.model.TicketItemModifier;
 import com.floreantpos.model.User;
@@ -172,7 +174,10 @@ public class OrderInfoDialog extends POSDialog {
 		Ticket ticket = new Ticket();
 		ticket.setPriceIncludesTax(oldticket.isPriceIncludesTax());
 		ticket.setOrderType(oldticket.getOrderType());
-		ticket.setProperties(oldticket.getProperties());
+		
+		//This Update the data in ticket_properties with the new ticket id and the old ticket result without properties.
+		//ticket.setProperties(oldticket.getProperties());
+		
 		ticket.setTerminal(Application.getInstance().getTerminal());
 		ticket.setOwner(Application.getCurrentUser());
 		ticket.setShift(Application.getInstance().getCurrentShift());
@@ -240,6 +245,18 @@ public class OrderInfoDialog extends POSDialog {
 					newTicketItem.addToaddOns(newAddOns);
 				}
 			}
+			
+			List<TicketItemCookingInstruction> cookingInstructions = oldTicketItem.getCookingInstructions();
+			if (cookingInstructions != null) {
+				for(TicketItemCookingInstruction cookingInstruction : cookingInstructions) {
+					TicketItemCookingInstruction newInstruction = new TicketItemCookingInstruction();
+					newInstruction.setDescription(cookingInstruction.getDescription());
+					newInstruction.setDiscountAmount(cookingInstruction.getDiscountAmount());
+					newInstruction.setPrintedToKitchen(cookingInstruction.isPrintedToKitchen());
+					newInstruction.setTableRowNum(cookingInstruction.getTableRowNum());
+					newTicketItem.addCookingInstruction(cookingInstruction);
+				}
+			}
 
 			newTicketItem.setTaxRate(oldTicketItem.getTaxRate());
 			newTicketItem.setBeverage(oldTicketItem.isBeverage());
@@ -251,7 +268,10 @@ public class OrderInfoDialog extends POSDialog {
 			newTicketItems.add(newTicketItem);
 		}
 		ticket.getTicketItems().addAll(newTicketItems);
-
+		ticket.setCustomer(oldticket.getCustomer());
+		if (ticket.getCustomer() != null)
+			ticket.setDeliveryAddress(ticket.getCustomer().getAddress());
+		
 		OrderView.getInstance().setCurrentTicket(ticket);
 		RootView.getInstance().showView(OrderView.VIEW_NAME);
 

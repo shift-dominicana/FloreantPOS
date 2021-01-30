@@ -730,7 +730,7 @@ public class OrderView extends ViewPanel implements PaymentListener, TicketEditL
 
 		if (!dialog.isCanceled()) {
 			currentTicket.setCustomer(dialog.getSelectedCustomer());
-			btnCustomer.setText("<html><body><center>CUSTOMER<br>\"" + dialog.getSelectedCustomer().getName() + "\"</center></body></html>");
+			btnCustomer.setText("<html><body><center>CLIENTE<br><b>\"" + dialog.getSelectedCustomer().getFirstName() + " "+ dialog.getSelectedCustomer().getMobileNo() + "\"<b></center></body></html>");
 
 		}
 	}
@@ -859,6 +859,10 @@ public class OrderView extends ViewPanel implements PaymentListener, TicketEditL
 				}
 
 				btnGuestNo.setText("GUEST" + ": " + String.valueOf(currentTicket.getNumberOfGuests()));
+			}
+			
+			if(type.isDelivery() && getCurrentTicket().getCustomer() != null) {
+				btnCustomer.setText("<html><body><center>CLIENTE<br><b>\"" + getCurrentTicket().getCustomer().getFirstName() +" "+getCurrentTicket().getCustomer().getMobileNo() + "\"<b></center></body></html>");
 			}
 			OrderServiceExtension orderService = (OrderServiceExtension) ExtensionManager.getPlugin(OrderServiceExtension.class);
 			btnDeliveryInfo.setVisible(orderService != null && type.isDelivery() && type.isRequiredCustomerData());
