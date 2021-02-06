@@ -437,6 +437,9 @@ public class TicketItem extends BaseTicketItem implements ITicketItem {
 
 			return false;
 		}
+		
+		if(this.getCookingInstructions().size() > 0 || otherItem.getCookingInstructions().size() > 0)
+			return false;
 
 		//		List<TicketItemModifierGroup> thisModifierGroups = this.getTicketItemModifierGroups();
 		//		List<TicketItemModifierGroup> thatModifierGroups = otherItem.getTicketItemModifierGroups();
