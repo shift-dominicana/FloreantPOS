@@ -258,8 +258,8 @@ public class KitchenTicket extends BaseKitchenTicket {
 				KitchenTicketItem item = new KitchenTicketItem();
 				item.setTicketItemId(ticketItem.getId());
 				item.setMenuItemCode(ticketItem.getItemCode());
-				item.setMenuItemName(ticketItem.getNameDisplay());
-				if (ticketItem.getMenuItem() == null) {
+				item.setMenuItemName(ticketItem.getNameDisplay());				
+				if (ticketItem.getCategoryName().equals("MISC")) {
 					item.setMenuItemGroupName("MISC."); //$NON-NLS-1$
 					item.setMenuItemGroupId(1001);
 					item.setSortOrder(10001);
@@ -317,7 +317,8 @@ public class KitchenTicket extends BaseKitchenTicket {
 				KitchenTicketItem item = new KitchenTicketItem();
 				item.setCookable(false);
 				item.setMenuItemName(ticketItemCookingInstruction.getNameDisplay());
-				if (ticketItem.getMenuItem() == null) {
+				
+				if (ticketItem.getCategoryName().equals("MISC")) {
 					item.setMenuItemGroupName("MISC."); //$NON-NLS-1$
 					item.setMenuItemGroupId(1001);
 					item.setSortOrder(10001);

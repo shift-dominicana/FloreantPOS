@@ -878,6 +878,9 @@ public class TicketView extends JPanel {
 
 	public boolean isStockAvailable(MenuItem menuItem, TicketItem selectedTicketItem, double selectedItemQuantity) {
 
+		if (selectedTicketItem.getCategoryName().equals("MISC")) {
+			return true;
+		}
 		if (!menuItem.isDisableWhenStockAmountIsZero()) {
 			return true;
 		}
