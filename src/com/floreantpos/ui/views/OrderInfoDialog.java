@@ -30,7 +30,7 @@ import javax.swing.JPanel;
 
 import com.floreantpos.Messages;
 import com.floreantpos.main.Application;
-import com.floreantpos.model.CookingInstruction;
+import com.floreantpos.model.OrderType;
 import com.floreantpos.model.Ticket;
 import com.floreantpos.model.TicketItem;
 import com.floreantpos.model.TicketItemCookingInstruction;
@@ -38,6 +38,7 @@ import com.floreantpos.model.TicketItemDiscount;
 import com.floreantpos.model.TicketItemModifier;
 import com.floreantpos.model.User;
 import com.floreantpos.model.UserPermission;
+import com.floreantpos.model.dao.OrderTypeDAO;
 import com.floreantpos.report.ReceiptPrintService;
 import com.floreantpos.swing.PosButton;
 import com.floreantpos.swing.PosUIManager;
@@ -53,10 +54,14 @@ public class OrderInfoDialog extends POSDialog {
 	private PosButton btnTransferUser;
 	private PosButton btnPrint;
 	private PosButton btnPrintDriverCopy;
+	private String messageBoxTxt;
+	private String messageBoxTitle;
 
 	public OrderInfoDialog(OrderInfoView view) {
 		this.view = view;
 		setTitle(Messages.getString("OrderInfoDialog.0")); //$NON-NLS-1$
+		messageBoxTxt = Messages.getString("OrderInfoDialog.5");
+		messageBoxTitle = Messages.getString("OrderInfoDialog.6");
 
 		createUI();
 	}
@@ -65,6 +70,7 @@ public class OrderInfoDialog extends POSDialog {
 		add(view);
 
 		JPanel panel = new JPanel();
+		
 		getContentPane().add(panel, BorderLayout.SOUTH);
 
 		btnReOrder = new PosButton("Reorder");
@@ -73,10 +79,23 @@ public class OrderInfoDialog extends POSDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				OrderType[] orderType = new OrderType[2];
+				orderType[0] = OrderTypeDAO.getInstance().findById(2);
+				orderType[1] = OrderTypeDAO.getInstance().findById(4);
+				int orderTypeOption = POSMessageDialog.showYesNoQuestionDialog(Application.getPosWindow(), messageBoxTxt, messageBoxTitle, orderType[0].getName(), orderType[1].getName());
 				for (Iterator iter = view.getTickets().iterator(); iter.hasNext();) {
-
+					
 					Ticket ticket = (Ticket) iter.next();
-
+					if (orderTypeOption < 0) {
+						//DELIVERY
+						ticket.setOrderType(orderType[1]);
+					}
+					else
+					{
+						//PICK UP
+						ticket.setOrderType(orderType[0]);
+					}
+					
 					createReOrder(ticket);
 					setCanceled(true);
 					dispose();

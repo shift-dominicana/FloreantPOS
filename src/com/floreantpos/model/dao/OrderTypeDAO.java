@@ -61,6 +61,20 @@ public class OrderTypeDAO extends BaseOrderTypeDAO {
 			closeSession(session);
 		}
 	}
+	
+	public OrderType findById(int orderTypeId) {
+		Session session = null;
+		try {
+			session = createNewSession();
+
+			Criteria criteria = session.createCriteria(getReferenceClass());
+			criteria.add(Restrictions.eq(OrderType.PROP_ID, orderTypeId));
+
+			return (OrderType) criteria.uniqueResult();
+		} finally {
+			closeSession(session);
+		}
+	}
 
 	/*
 	 * 
