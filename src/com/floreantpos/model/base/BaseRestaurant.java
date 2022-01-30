@@ -19,6 +19,7 @@ public abstract class BaseRestaurant  implements Comparable, Serializable {
 	public static String PROP_TELEPHONE = "telephone"; //$NON-NLS-1$
 	public static String PROP_TICKET_FOOTER_MESSAGE = "ticketFooterMessage"; //$NON-NLS-1$
 	public static String PROP_SERVICE_CHARGE_PERCENTAGE = "serviceChargePercentage"; //$NON-NLS-1$
+	public static String PROP_DELIVERY_CHARGE_AMOUNT = "deliveryChargeAmount"; //$NON-NLS-1$
 	public static String PROP_UNIQUE_ID = "uniqueId"; //$NON-NLS-1$
 	public static String PROP_ZIP_CODE = "zipCode"; //$NON-NLS-1$
 	public static String PROP_NAME = "name"; //$NON-NLS-1$
@@ -69,6 +70,7 @@ public abstract class BaseRestaurant  implements Comparable, Serializable {
 		protected java.lang.String currencyName;
 		protected java.lang.String currencySymbol;
 		protected java.lang.Double serviceChargePercentage;
+		protected java.lang.Double deliveryChargeAmount;
 		protected java.lang.Double defaultGratuityPercentage;
 		protected java.lang.String ticketFooterMessage;
 		protected java.lang.Boolean itemPriceIncludesTax;
@@ -298,6 +300,22 @@ public abstract class BaseRestaurant  implements Comparable, Serializable {
 	 */
 	public void setServiceChargePercentage (java.lang.Double serviceChargePercentage) {
 		this.serviceChargePercentage = serviceChargePercentage;
+	}
+	
+	
+	/**
+	 * Return the value associated with the column: DC_AMOUNT
+	 */
+	public java.lang.Double getDeliveryChargeAmount() {
+		return deliveryChargeAmount;
+	}
+
+	/**
+	 * Set the value related to the column: DC_AMOUNT
+	 * @param deliveryChargeAmount the DC_AMOUNT value
+	 */
+	public void setDeliveryChargeAmount (java.lang.Double deliveryChargeAmount) {
+		this.deliveryChargeAmount = deliveryChargeAmount;
 	}
 
 

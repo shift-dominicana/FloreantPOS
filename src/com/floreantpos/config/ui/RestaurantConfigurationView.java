@@ -45,6 +45,7 @@ public class RestaurantConfigurationView extends ConfigurationView {
 	private POSTextField tfTelephone;
 	//private POSTextField tfCurrencyName;
 	//private POSTextField tfCurrencySymbol;
+	private POSTextField tfDeliveryCharge;
 	private POSTextField tfServiceCharge;
 	private POSTextField tfDefaultGratuity;
 	private POSTextField tfTicketFooter;
@@ -112,30 +113,39 @@ public class RestaurantConfigurationView extends ConfigurationView {
 
 		//JSeparator separator_1 = new JSeparator();
 		//contentPanel.add(separator_1, "cell 0 11 4 1,growx"); //$NON-NLS-1$
-
+		
+		JLabel lblDeliveryCharge = new JLabel(Messages.getString("RestaurantConfigurationView.55") + ":"); //$NON-NLS-1$ //$NON-NLS-2$
+		contentPanel.add(lblDeliveryCharge, "cell 0 12,alignx trailing"); //$NON-NLS-1$
+		
+		tfDeliveryCharge = new POSTextField();
+		contentPanel.add(tfDeliveryCharge, "cell 1 12,growx"); //$NON-NLS-1$
+		
+		JLabel labelMoney = new JLabel("$"); //$NON-NLS-1$
+		contentPanel.add(labelMoney, "cell 2 12"); //$NON-NLS-1$
+		
 		JLabel lblServiceCharge = new JLabel(Messages.getString("RestaurantConfigurationView.42") + ":"); //$NON-NLS-1$ //$NON-NLS-2$
-		contentPanel.add(lblServiceCharge, "cell 0 12,alignx trailing"); //$NON-NLS-1$
+		contentPanel.add(lblServiceCharge, "cell 0 13,alignx trailing"); //$NON-NLS-1$
 
 		tfServiceCharge = new POSTextField();
-		contentPanel.add(tfServiceCharge, "cell 1 12,growx"); //$NON-NLS-1$
+		contentPanel.add(tfServiceCharge, "cell 1 13,growx"); //$NON-NLS-1$
 
 		JLabel label = new JLabel("%"); //$NON-NLS-1$
-		contentPanel.add(label, "cell 2 12"); //$NON-NLS-1$
+		contentPanel.add(label, "cell 2 13"); //$NON-NLS-1$
 
 		JLabel lblDefaultGratuity = new JLabel(Messages.getString("RestaurantConfigurationView.48") + ":"); //$NON-NLS-1$ //$NON-NLS-2$
-		contentPanel.add(lblDefaultGratuity, "flowy,cell 0 13,alignx trailing"); //$NON-NLS-1$
+		contentPanel.add(lblDefaultGratuity, "flowy,cell 0 14,alignx trailing"); //$NON-NLS-1$
 
 		tfDefaultGratuity = new POSTextField();
-		contentPanel.add(tfDefaultGratuity, "cell 1 13,growx"); //$NON-NLS-1$
+		contentPanel.add(tfDefaultGratuity, "cell 1 14,growx"); //$NON-NLS-1$
 
 		JLabel label_1 = new JLabel("%"); //$NON-NLS-1$
-		contentPanel.add(label_1, "cell 2 13"); //$NON-NLS-1$
+		contentPanel.add(label_1, "cell 2 14"); //$NON-NLS-1$
 
 		JLabel lblTicketFooterMessage = new JLabel(Messages.getString("RestaurantConfigurationView.54") + ":"); //$NON-NLS-1$ //$NON-NLS-2$
-		contentPanel.add(lblTicketFooterMessage, "cell 0 14,alignx trailing"); //$NON-NLS-1$
+		contentPanel.add(lblTicketFooterMessage, "cell 0 15,alignx trailing"); //$NON-NLS-1$
 
 		tfTicketFooter = new POSTextField();
-		contentPanel.add(tfTicketFooter, "cell 1 14 3 1,growx"); //$NON-NLS-1$
+		contentPanel.add(tfTicketFooter, "cell 1 15 3 1,growx"); //$NON-NLS-1$
 
 		JScrollPane scrollPane = new JScrollPane(contentPanel);
 		scrollPane.setBorder(null);
@@ -158,6 +168,7 @@ public class RestaurantConfigurationView extends ConfigurationView {
 
 		int capacity = 0;
 		int tables = 0;
+		double deliveryCharge = 0;
 		double serviceCharge = 0;
 		double gratuityPercentage = 0;
 
@@ -181,6 +192,13 @@ public class RestaurantConfigurationView extends ConfigurationView {
 		} catch (Exception x) {
 			//do nothing
 		}
+		
+		try {
+			deliveryCharge = Double.parseDouble(tfDeliveryCharge.getText());
+		} catch (Exception x) {
+			//do nothing
+		}
+
 
 		try {
 			gratuityPercentage = Double.parseDouble(tfDefaultGratuity.getText());
@@ -199,6 +217,7 @@ public class RestaurantConfigurationView extends ConfigurationView {
 		restaurant.setCurrencyName(currencyName);
 		restaurant.setCurrencySymbol(currencySymbol);
 		restaurant.setServiceChargePercentage(serviceCharge);
+		restaurant.setDeliveryChargeAmount(deliveryCharge);
 		restaurant.setDefaultGratuityPercentage(gratuityPercentage);
 		restaurant.setTicketFooterMessage(tfTicketFooter.getText());
 
@@ -223,6 +242,7 @@ public class RestaurantConfigurationView extends ConfigurationView {
 		//tfCurrencyName.setText(restaurant.getCurrencyName());
 		//tfCurrencySymbol.setText(restaurant.getCurrencySymbol());
 		tfServiceCharge.setText(String.valueOf(restaurant.getServiceChargePercentage()));
+		tfDeliveryCharge.setText(String.valueOf(restaurant.getDeliveryChargeAmount()));
 		tfDefaultGratuity.setText(String.valueOf(restaurant.getDefaultGratuityPercentage()));
 		tfTicketFooter.setText(restaurant.getTicketFooterMessage());
 
