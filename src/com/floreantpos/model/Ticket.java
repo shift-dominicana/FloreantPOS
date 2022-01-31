@@ -418,19 +418,14 @@ public class Ticket extends BaseTicket {
 	}
 
 	public Double getDeliveryCharge() {
-		Double deliveryCharge = super.getDeliveryCharge();
-		
+		Restaurant restaurant = Application.getInstance().getRestaurant();
+		Double deliveryCharge = (this.deliveryCharge==null)?restaurant.getDeliveryChargeAmount():this.deliveryCharge;
 		
 		// Comes null from Drawer report. When close Drawer
 		if (this.orderType != null) {
-			if (this.orderType.isDelivery()) 
-				//Have to be a db field
-				deliveryCharge=  50.0;
-			else
+			if (!this.orderType.isDelivery()) 
 				deliveryCharge =  0.0;
 		}
-			
-		
 		
 		return deliveryCharge;
 	}
