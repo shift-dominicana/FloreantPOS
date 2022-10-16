@@ -29,6 +29,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -62,6 +63,7 @@ public class CookingInstructionSelectionView extends OkCancelOptionDialog {
 		super(Application.getPosWindow(), true);
 		createUI();
 		updateView();
+		setFocusInTextField();
 	}
 
 	private void createUI() {
@@ -105,6 +107,7 @@ public class CookingInstructionSelectionView extends OkCancelOptionDialog {
 
 			}
 		});
+	
 
 		PosButton btnSave = new PosButton(IconFactory.getIcon("save.png"));
 		btnSave.setText(POSConstants.SAVE.toUpperCase());
@@ -146,6 +149,15 @@ public class CookingInstructionSelectionView extends OkCancelOptionDialog {
 		CookingInstructionTableModel model = (CookingInstructionTableModel) table.getModel();
 		model.rowsList = filteredInstructions;
 		model.fireTableDataChanged();
+	}
+	
+	private void setFocusInTextField() {
+		
+		SwingUtilities.invokeLater(new Runnable() {
+		      public void run() {
+		    	  tfCookingInstruction.requestFocus();
+		      }
+		    });
 	}
 
 	@Override
